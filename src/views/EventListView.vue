@@ -2,6 +2,9 @@
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import EventCard from '@/components/EventCard.vue'
 import EventService from '@/services/EventService.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const props = defineProps(['page'])
 
@@ -25,6 +28,8 @@ onMounted(() => {
       })
       .catch((error) => {
         console.log(error)
+        //if API or network fails:
+        router.push({ name: 'NetworkErrorView' })
       })
   })
 })
